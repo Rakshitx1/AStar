@@ -14,6 +14,7 @@ Grid::Grid(int width, int height) : width(width), height(height) {
 
 // Destructor
 Grid::~Grid() {
+    // Clean up
     for (Coordinate* coordinate : coordinateGrid) {
         delete coordinate;
     }
@@ -61,11 +62,4 @@ void Grid::printGrid() const{
         }
         std::cout << std::endl;
     }
-}
-
-Coordinate *Grid::getPointer(Coordinate *coord) const {
-    int x = coord->getX();
-    int y = coord->getY();
-
-    return getCoordinate(x, y);
 }

@@ -15,6 +15,5 @@ public:
     [[nodiscard]] Coordinate* getCoordinate(int x, int y) const;
     std::vector<Coordinate*> getNeighbors(Coordinate* coordinate) const;
     void printGrid() const;
-    Coordinate* getPointer(Coordinate* coord) const;
 
 };

@@ -49,10 +49,15 @@ else
     EXECUTABLE="./build/Debug/$PROJECT_NAME"
 fi
 
-"$EXECUTABLE" "${@:3}"
+# Check if it should be timed
+if [ "${3,,}" == "t" ]; then
+    time $EXECUTABLE "${@:4}"
+else
+    $EXECUTABLE "${@:3}"
+fi
 
-# Check if any of the input arguments is "b", then delete build directory
-if [[ "${1,,}" == "b" || "${2,,}" == "b" ]]; then
+# Check if the build directory should be deleted
+if [ "${2,,}" == "b" ]; then
     cd "$SCRIPT_DIR"
     rm -rf build
     echo -e "\033[34mBuild directory deleted.\033[0m"

@@ -27,13 +27,13 @@ Astar::~Astar(){
     closedList.shrink_to_fit();
 }
 
-void Astar::doMagic(Grid *grid, Coordinate *start, Coordinate *end, std::vector<Coordinate *> blockedList) {
-    findPath(grid, start, end, std::move(blockedList));
+void Astar::doMagic(Grid *grid, Coordinate *start, Coordinate *end, const std::vector<Coordinate*>& blockedList) {
+    findPath(grid, start, end, blockedList);
     printPath(end);
 }
 
 // Find path
-void Astar::findPath(Grid* grid, Coordinate* start, Coordinate* end, std::vector<Coordinate*> blockedList){
+void Astar::findPath(Grid* grid, Coordinate* start, Coordinate* end, const std::vector<Coordinate*>& blockedList){
     start->setF(0);
     start->setG(start->distanceTo(end));
     start->setH(start->getG());
@@ -88,16 +88,13 @@ void Astar::findPath(Grid* grid, Coordinate* start, Coordinate* end, std::vector
 void Astar::printPath(const Coordinate* end) {
     std::vector<const Coordinate*> path;
     const Coordinate* current = end;
-    int i = 0;
     while(current != nullptr){
         path.push_back(current);
         current = current->getParent();
-        i++;
     }
 
     std::cout << "Path: " << std::endl;
-//    for(int i = path.size() - 1; i >= 0; i--){
-    for(i--; i >= 0; i--){
+    for(int i = path.size() - 1; i >= 0; i--){
         std::cout << path[i]->getX() << ", " << path[i]->getY() << std::endl;
     }
 }

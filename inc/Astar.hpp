@@ -10,8 +10,8 @@ private:
 public:
     Astar();
     ~Astar();
-    void doMagic(Grid* grid, Coordinate* start, Coordinate* end, std::vector<Coordinate*> blockedList);
-    void findPath(Grid* grid, Coordinate* start, Coordinate* end, std::vector<Coordinate*> blockedList);
+    void doMagic(Grid* grid, Coordinate* start, Coordinate* end, const std::vector<Coordinate*>& blockedList);
+    void findPath(Grid* grid, Coordinate* start, Coordinate* end, const std::vector<Coordinate*>& blockedList);
     static void printPath(const Coordinate* end) ;
 
 };
