@@ -1,16 +1,16 @@
 cmake_minimum_required(VERSION 3.10)
 
 # Define the project name as a variable
-set(PROJECT_NAME Template)
+set(PROJECT_NAME AStar)
 
 project(${PROJECT_NAME} VERSION 1.0 LANGUAGES C CXX)
 
 # Set C++ standard
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Set C standard
-set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_STANDARD 20)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
 # Print the C++ and C standard versions
