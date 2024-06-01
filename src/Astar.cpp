@@ -34,14 +34,14 @@ void Astar::doMagic(Grid *grid, Coordinate *start, Coordinate *end, const std::v
 
 // Find path
 void Astar::findPath(Grid* grid, Coordinate* start, Coordinate* end, const std::vector<Coordinate*>& blockedList){
-    start->setF(0);
-    start->setG(start->distanceTo(end));
-    start->setH(start->getG());
+    start->setG(0);
+    start->setH(start->distanceTo(end));
+    start->setF(start->getG());
     start->setParent(nullptr);
 
-    end->setF(start->getG());
-    end->setG(0);
-    end->setH(end->getF());
+    end->setG(start->getG());
+    end->setH(0);
+    end->setF(end->getF());
 
     openList.push_back(start);
 
@@ -70,11 +70,11 @@ void Astar::findPath(Grid* grid, Coordinate* start, Coordinate* end, const std::
                 continue;
             }
 
-            if((neighbor->getF() > current->getF() + current->distanceTo(neighbor)) || 
+            if((neighbor->getG() > current->getG() + current->distanceTo(neighbor)) || 
                (std::find(openList.begin(), openList.end(), neighbor) == openList.end())){
-                neighbor->setF(current->getF() + current->distanceTo(neighbor));
-                neighbor->setG(neighbor->distanceTo(end));
-                neighbor->setH(neighbor->getG() + neighbor->getF());
+                neighbor->setG(current->getF() + current->distanceTo(neighbor));
+                neighbor->setH(neighbor->distanceTo(end));
+                neighbor->setF(neighbor->getG() + neighbor->getF());
                 neighbor->setParent(current);
 
                 if(std::find(openList.begin(), openList.end(), neighbor) == openList.end()){
