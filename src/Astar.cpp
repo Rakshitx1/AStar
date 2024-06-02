@@ -36,16 +36,19 @@ void Astar::doMagic(Grid *grid, Coordinate *start, Coordinate *end, const std::v
 void Astar::findPath(Grid* grid, Coordinate* start, Coordinate* end, const std::vector<Coordinate*>& blockedList){
     start->setG(0);
     start->setH(start->distanceTo(end));
-    start->setF(start->getG());
+    start->setF(start->getH());
     start->setParent(nullptr);
 
-    end->setG(start->getG());
+    end->setG(end->distanceTo(start));
     end->setH(0);
-    end->setF(end->getF());
+    end->setF(end->getG());
+    end->setParent(nullptr);
 
-    openList.push_back(start);
+    this->openList.push_back(start);
 
     while(!openList.empty()){
+        std::vector<Coordinate*> neighbors;
+        neighbors.clear();
         Coordinate* current = openList[0];
         for(int i = 1; i < openList.size(); i++){
             if(openList[i]->getF() < current->getF() || (openList[i]->getF() == current->getF() && openList[i]->getH() < current->getH())){
@@ -60,7 +63,7 @@ void Astar::findPath(Grid* grid, Coordinate* start, Coordinate* end, const std::
             break;
         }
 
-        std::vector<Coordinate*> neighbors = grid->getNeighbors(current);
+        neighbors = grid->getNeighbors(current);
         for(Coordinate* neighbor : neighbors){
             if(std::find(blockedList.begin(), blockedList.end(), neighbor) != blockedList.end()){
                 continue;
@@ -72,9 +75,9 @@ void Astar::findPath(Grid* grid, Coordinate* start, Coordinate* end, const std::
 
             if((neighbor->getG() > current->getG() + current->distanceTo(neighbor)) || 
                (std::find(openList.begin(), openList.end(), neighbor) == openList.end())){
-                neighbor->setG(current->getF() + current->distanceTo(neighbor));
+                neighbor->setG(current->getG() + current->distanceTo(neighbor));
                 neighbor->setH(neighbor->distanceTo(end));
-                neighbor->setF(neighbor->getG() + neighbor->getF());
+                neighbor->setF(neighbor->getG() + neighbor->getH());
                 neighbor->setParent(current);
 
                 if(std::find(openList.begin(), openList.end(), neighbor) == openList.end()){

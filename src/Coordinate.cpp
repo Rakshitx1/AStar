@@ -7,7 +7,7 @@ Coordinate::Coordinate(int x, int y) {
     this->x = x;
     this->y = y;
 
-    // set F to infinity
+    // set G to infinity
     this->g = INT_MAX;
 
     // set Parent to nullptr

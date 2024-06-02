@@ -4,12 +4,7 @@
 
 // Constructor
 Grid::Grid(int width, int height) : width(width), height(height) {
-    coordinateGrid.resize(width * height);
-    for (int i = 0; i < width; i++) {
-        for (int j = 0; j < height; j++) {
-            coordinateGrid[i * height + j] = new Coordinate(i, j);
-        }
-    }
+    coordinateGrid.clear();
 }
 
 // Destructor
@@ -27,26 +22,31 @@ bool Grid::isValidCoordinate(int x, int y) const {
 }
 
 // Get a coordinate object
-Coordinate* Grid::getCoordinate(int x, int y) const {
+Coordinate* Grid::getCoordinate(int x, int y) {
     if (isValidCoordinate(x, y)) {
-        return coordinateGrid[x * height + y];
+        for(Coordinate* coord : coordinateGrid){
+            if(coord->getX() == x && coord->getY() == y){
+                return coord;
+            }
+        }
+        Coordinate* newCoord = new Coordinate(x, y);
+        coordinateGrid.push_back(newCoord);
+        return newCoord;
+        // return coordinateGrid[x * height + y];
     }
     return nullptr;
 }
 
 // Get neighbors of a coordinate
-std::vector<Coordinate*> Grid::getNeighbors(Coordinate* coordinate) const {
+std::vector<Coordinate*> Grid::getNeighbors(Coordinate* coordinate) {
     std::vector<Coordinate*> neighbors;
     int x = coordinate->getX();
     int y = coordinate->getY();
 
-    for (int i = -1; i <= 1; i++) {
-        for (int j = -1; j <= 1; j++) {
-            if (i == 0 && j == 0) {
-                continue;
-            }
-            if (isValidCoordinate(x + i, y + j)) {
-                neighbors.push_back(coordinateGrid[(x + i) * height + (y + j)]);
+    for (int x2 = x - 1; x2 <= x + 1; x2++) {
+        for (int y2 = y - 1; y2 <= y + 1; y2++) {
+            if (isValidCoordinate(x2, y2) && (x2 != x || y2 != y)) {
+                neighbors.push_back(getCoordinate(x2, y2));
             }
         }
     }
@@ -55,7 +55,7 @@ std::vector<Coordinate*> Grid::getNeighbors(Coordinate* coordinate) const {
 }
 
 // Print the grid
-void Grid::printGrid() const{
+void Grid::printGrid() {
     for(int i = 0; i < width; i++){
         for(int j = 0; j < height; j++){
             std::cout << this->getCoordinate(i, j)->getH() << ", ";

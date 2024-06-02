@@ -12,8 +12,8 @@ public:
     Grid(int width, int height);
     ~Grid();
     [[nodiscard]] bool isValidCoordinate(int x, int y) const;
-    [[nodiscard]] Coordinate* getCoordinate(int x, int y) const;
-    std::vector<Coordinate*> getNeighbors(Coordinate* coordinate) const;
-    void printGrid() const;
+    [[nodiscard]] Coordinate* getCoordinate(int x, int y);
+    std::vector<Coordinate*> getNeighbors(Coordinate* coordinate);
+    void printGrid();
 
 };
