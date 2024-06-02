@@ -27,17 +27,5 @@ int main(int argc, char* argv[]) {
     auto* astar = new Astar();
     astar->doMagic(grid, start, end, blockedList);
 
-    // Delete the Astar object
-    // astar->~Astar();
-    // delete astar;
-
-    // Delete the grid
-    // grid->~Grid();
-    // delete grid;
-
-    for(int i = 0; i < argc; i++){
-        std::cout << argv[i] << std::endl;
-    }
-
     return EXIT_SUCCESS;
 }

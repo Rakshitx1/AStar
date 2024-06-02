@@ -16,15 +16,14 @@ Coordinate::Coordinate(int x, int y) {
 
 Coordinate::~Coordinate() {
     // Clean up
-    delete this->parent;
-    this->parent = nullptr;
+    this->x = 0;
+    this->y = 0;
 
     this->f = 0;
     this->g = 0;
     this->h = 0;
 
-    this->x = 0;
-    this->y = 0;
+    this->parent = nullptr;
 }
 
 void Coordinate::setF(int f) {

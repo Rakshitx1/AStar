@@ -13,7 +13,9 @@ Grid::~Grid() {
     for (Coordinate* coordinate : coordinateGrid) {
         delete coordinate;
     }
+
     coordinateGrid.clear();
+    coordinateGrid.shrink_to_fit();
 }
 
 // Check if a coordinate is valid
@@ -29,10 +31,8 @@ Coordinate* Grid::getCoordinate(int x, int y) {
                 return coord;
             }
         }
-        Coordinate* newCoord = new Coordinate(x, y);
-        coordinateGrid.push_back(newCoord);
-        return newCoord;
-        // return coordinateGrid[x * height + y];
+        coordinateGrid.push_back(new Coordinate(x, y));
+        return coordinateGrid.back();
     }
     return nullptr;
 }

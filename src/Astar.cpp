@@ -2,24 +2,12 @@
 
 #include <algorithm>
 #include <iostream>
-#include <utility>
-
 
 // Constructor
-Astar::Astar(){
-    // Do nothing
-}
+Astar::Astar() = default;
 
 // Destructor
 Astar::~Astar(){
-    for(Coordinate* coord : openList){
-        delete coord;
-    }
-
-    for(Coordinate* coord : closedList){
-        delete coord;
-    }
-
     openList.clear();
     closedList.clear();
 
