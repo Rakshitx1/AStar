@@ -38,9 +38,9 @@ void Astar::findPath(Grid* grid, Coordinate* start, Coordinate* end, const std::
         std::vector<Coordinate*> neighbors;
         neighbors.clear();
         Coordinate* current = openList[0];
-        for(int i = 1; i < openList.size(); i++){
-            if(openList[i]->getF() < current->getF() || (openList[i]->getF() == current->getF() && openList[i]->getH() < current->getH())){
-                current = openList[i];
+        for(auto& coord : openList){
+            if(coord->getF() < current->getF() || (coord->getF() == current->getF() && coord->getH() < current->getH())){
+                current = coord;
             }
         }
 
@@ -85,8 +85,8 @@ void Astar::printPath(const Coordinate* end) {
     }
 
     std::cout << "Path: " << std::endl;
-    for(int i = path.size() - 1; i >= 0; i--){
-        std::cout << path[i]->getX() << ", " << path[i]->getY() << std::endl;
+    for(auto it = path.rbegin(); it != path.rend(); ++it){
+        std::cout << "(" << (*it)->getX() << ", " << (*it)->getY() << ")" << std::endl;
     }
 }
 

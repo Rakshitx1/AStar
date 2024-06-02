@@ -26,16 +26,16 @@ Coordinate::~Coordinate() {
     this->parent = nullptr;
 }
 
-void Coordinate::setF(int f) {
-    this->f = f;
+void Coordinate::setF(int newF) {
+    this->f = newF;
 }
 
-void Coordinate::setG(int g) {
-    this->g = g;
+void Coordinate::setG(int newG) {
+    this->g = newG;
 }
 
-void Coordinate::setH(int h) {
-    this->h = h;
+void Coordinate::setH(int newH) {
+    this->h = newH;
 }
 
 int Coordinate::getF() const {
@@ -62,11 +62,11 @@ Coordinate* Coordinate::getParent() const {
     return this->parent;
 }
 
-void Coordinate::setParent(Coordinate* parent) {
-    this->parent = parent;
+void Coordinate::setParent(Coordinate* newParent) {
+    this->parent = newParent;
 }
 
 int Coordinate::distanceTo(Coordinate* other) const {
-    float distance = pow(pow(other->getX() - this->x, 2) + pow(other->getY() - this->y, 2), 0.5);
-    return static_cast<int>(round(distance * 10));
+    double distance = pow(pow(other->getX() - this->x, 2) + pow(other->getY() - this->y, 2), 0.5);
+    return static_cast<int>(distance * 10);
 }
