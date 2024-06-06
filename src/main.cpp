@@ -27,5 +27,15 @@ int main(int argc, char* argv[]) {
     auto* astar = new Astar();
     astar->doMagic(grid, start, end, blockedList);
 
+    // Clean up
+    astar->~Astar();
+    grid->~Grid();
+    start->~Coordinate();
+    end->~Coordinate();
+
+    for(auto& blocked : blockedList){
+        blocked->~Coordinate();
+    }
+
     return EXIT_SUCCESS;
 }

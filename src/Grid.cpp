@@ -11,11 +11,14 @@ Grid::Grid(int width, int height) : width(width), height(height) {
 Grid::~Grid() {
     // Clean up
     for (Coordinate* coordinate : coordinateGrid) {
-        delete coordinate;
+        coordinate->~Coordinate();
     }
 
     coordinateGrid.clear();
     coordinateGrid.shrink_to_fit();
+
+    this->width = 0;
+    this->height = 0;
 }
 
 // Check if a coordinate is valid
